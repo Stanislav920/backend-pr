@@ -9,6 +9,9 @@ const app = express();
 
 const { centralizedHandler } = require('./middlewares/centralized-handler');
 
+const { loginUser, createUser } = require('./controllers/users');
+const { validateUserAuth, validateUserRegister, } = require('./utils/validation');
+
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 const auth = require('./middlewares/auth');
@@ -21,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 // Логгер
 app.use(requestLogger);
 
+// Cors
 app.use(cors);
 
 app.get('/crash-test', () => {
@@ -28,6 +32,9 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+router.post('/signin', validateUserAuth, loginUser);
+router.post('/signup', validateUserRegister, createUser);
 
 app.use(auth);
 
