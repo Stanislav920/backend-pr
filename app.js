@@ -33,8 +33,8 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-router.post('/signin', validateUserAuth, loginUser);
-router.post('/signup', validateUserRegister, createUser);
+app.post('/signin', validateUserAuth, loginUser);
+app.post('/signup', validateUserRegister, createUser);
 
 app.use(auth);
 
