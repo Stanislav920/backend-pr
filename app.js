@@ -13,8 +13,10 @@ const { loginUser, createUser } = require('./controllers/users');
 const { validateUserAuth, validateUserRegister, } = require('./utils/validation');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const cors = require('./middlewares/cors');
 const auth = require('./middlewares/auth');
+
 const NotFoundError = require('./utils/repsone-errors/NotFoundError');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
