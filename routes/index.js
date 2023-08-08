@@ -4,12 +4,14 @@ const cardRouter = require('./cards');
 
 const UnauthorizedError = require('../utils/repsone-errors/UnauthorizedError');
 
+const authGuard = require('../middlewares/auth');
+
 const router = express.Router();
 
-router.use('/users', userRouter);
-router.use('/cards', cardRouter);
+router.use('/users', authGuard, userRouter);
+router.use('/cards', authGuard, cardRouter);
 
-router.use('*', (req, res, next) => {
+router.use('*', authGuard, (req, res, next) => {
   next(new UnauthorizedError('Страница не найдена'));
 });
 
