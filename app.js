@@ -15,7 +15,6 @@ const { validateUserAuth, validateUserRegister, } = require('./utils/validation'
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const cors = require('./middlewares/cors');
-const auth = require('./middlewares/auth');
 
 const NotFoundError = require('./utils/repsone-errors/NotFoundError');
 
