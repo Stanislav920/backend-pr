@@ -9,12 +9,10 @@ const app = express();
 
 const centralizedHandler = require('./middlewares/centralized-handler');
 
-const { loginUser, createUser } = require('./controllers/users');
-const { validateUserAuth, validateUserRegister, } = require('./utils/validation');
-
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const cors = require('./middlewares/cors');
+// const auth = require('./middlewares/auth');
 
 const NotFoundError = require('./utils/repsone-errors/NotFoundError');
 
@@ -34,8 +32,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signin', validateUserAuth, loginUser);
-app.post('/signup', validateUserRegister, createUser);
+// app.use(auth);
 
 app.use(router);
 
