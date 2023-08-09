@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
-const router = require('./routes');
+const router = require('./routes/index');
 
 const { PORT = 3000 } = process.env;
 
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 
 // Cors
-app.use(cors);
+app.use(cors());
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -42,6 +42,7 @@ app.use(auth);
 
 app.use(router);
 
+// Краш-тест
 app.use((req, res, next) => {
   next(new NotFoundError('Порт не существует'));
 });
