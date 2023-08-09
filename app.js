@@ -9,7 +9,7 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-const centralizedHandler = require('./middlewares/centralized-handler');
+// const centralizedHandler = require('./middlewares/centralized-handler');
 
 const { loginUser, createUser } = require('./controllers/users');
 const { validateUserAuth, validateUserRegister, } = require('./utils/validation');
@@ -54,6 +54,6 @@ app.use(errorLogger);
 
 // Обрабочек ответа.
 app.use(errors());
-app.use(centralizedHandler);
+// app.use(centralizedHandler);
 
 app.listen(PORT, () => console.log('Сервер запущен!'));
