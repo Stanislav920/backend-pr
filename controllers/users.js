@@ -95,24 +95,19 @@ module.exports.updateAvatar = (req, res, next) => {
 
 // Логин пользователя.
 
-module.exports.loginUser = (req, res, next) => {
+module.exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
-  return User.findOne({ email }).select('+password')
-    .then((user) => {
-      if (!user) {
-        return next(new UnauthorizedError('Имя пользователя или (-и) пароль введены неверно'));
-      }
-      return bcrypt.compare(password, user.password).then((correct) => {
-        if (!correct) {
-          return next(new UnauthorizedError('Имя пользователя или (-и) пароль введены неверно'));
-        }
-
-        const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-secret', { expiresIn: '7d' });
-
-        return res.send({ token });
-      });
-    });
+  const user = User.findOne({ email }).select('+password');
+  if (!user) {
+    return next(new UnauthorizedError('Имя пользователя или (-и) пароль введены неверно'));
+  }
+  const correct = bcrypt.compare(password, user.password);
+  if (!correct) {
+    return next(new UnauthorizedError('Имя пользователя или (-и) пароль введены неверно'));
+  }
+  const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-secret', { expiresIn: '7d' });
+  return res.send({ token });
 };
 
 // Получение профиля пользователя.
