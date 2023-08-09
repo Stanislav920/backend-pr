@@ -7,7 +7,7 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-const centralizedHandler = require('./middlewares/centralized-handler');
+const centralizedHandler = require('./middlewares/centralizedHandler');
 
 const { loginUser, createUser } = require('./controllers/users');
 const { validateUserAuth, validateUserRegister, } = require('./utils/validation');
