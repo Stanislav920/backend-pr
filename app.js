@@ -29,6 +29,7 @@ app.use(requestLogger);
 // Cors
 app.use(cors);
 
+// Краш-тест
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -42,7 +43,6 @@ app.use(auth);
 
 app.use(router);
 
-// Краш-тест
 app.use((req, res, next) => {
   next(new NotFoundError('Порт не существует'));
 });
