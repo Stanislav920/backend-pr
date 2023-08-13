@@ -1,18 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { errors } = require('celebrate');
+// const { errors } = require('celebrate');
 const router = require('./routes/index');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-const centralizedHandler = require('./middlewares/centralizedHandler');
+// const centralizedHandler = require('./middlewares/centralizedHandler');
 
 const { loginUser, createUser } = require('./controllers/users');
 const { validateUserAuth, validateUserRegister, } = require('./utils/validation');
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+// const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const cors = require('./middlewares/cors');
 const auth = require('./middlewares/auth');
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Логгер
-app.use(requestLogger);
+// app.use(requestLogger);
 
 // Cors
 app.use(cors);
@@ -48,10 +48,10 @@ app.use((req, res, next) => {
 });
 
 // Ошибки логгера
-app.use(errorLogger);
+// app.use(errorLogger);
 
 // Обрабочек ответа.
-app.use(errors());
-app.use(centralizedHandler);
+// app.use(errors());
+// app.use(centralizedHandler);
 
 app.listen(PORT, () => console.log('Сервер запущен!'));
