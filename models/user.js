@@ -1,6 +1,5 @@
 // models/user.js
 const mongoose = require('mongoose');
-
 const validator = require('validator');
 const { regular } = require('../utils/validation');
 
