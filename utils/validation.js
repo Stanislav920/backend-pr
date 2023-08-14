@@ -83,4 +83,5 @@ module.exports = {
   validateUserAvatar,
   validateCreateCard,
   validateCardId,
+  regular,
 };
